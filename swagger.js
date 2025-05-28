@@ -1,77 +1,77 @@
 module.exports = {
-  openapi: "3.0.0",
+  openapi: '3.0.0',
   info: {
-    title: "API Fullstack Viba - UsuariosJoel",
-    version: "1.0.0",
-    description: "Documentación del CRUD para la tabla UsersJoel",
+    title: 'API Fullstack Viba - UsuariosJoel',
+    version: '1.0.0',
+    description: 'Documentación del CRUD para la tabla UsersJoel',
   },
   paths: {
-    "/api/auth/login": {
+    '/api/auth/login': {
   post: {
-    summary: "Iniciar sesión",
-    tags: ["Auth"],
+    summary: 'Iniciar sesión',
+    tags: ['Auth'],
     requestBody: {
       required: true,
       content: {
-        "application/json": {
+        'application/json': {
           schema: {
-            type: "object",
+            type: 'object',
             properties: {
-              CorreoElectronico: { type: "string" },
-              password: { type: "string" }
+              CorreoElectronico: { type: 'string' },
+              password: { type: 'string' }
             },
-            required: ["CorreoElectronico", "password"]
+            required: ['CorreoElectronico', 'password']
           }
         }
       }
     },
     responses: {
       200: {
-        description: "Inicio de sesión exitoso (JWT generado)",
+        description: 'Inicio de sesión exitoso (JWT generado)',
         content: {
-          "application/json": {
+          'application/json': {
             schema: {
-              type: "object",
+              type: 'object',
               properties: {
                 token: {
-                  type: "string",
-                  description: "Token JWT para autenticación"
+                  type: 'string',
+                  description: 'Token JWT para autenticación'
                 }
               },
               example: {
-                token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
               }
             }
           }
         }
       },
-      401: { description: "Credenciales inválidas" },
-      400: { description: "Faltan campos requeridos" },
-      500: { description: "Error del servidor" }
+      401: { description: 'Credenciales inválidas' },
+      400: { description: 'Faltan campos requeridos' },
+      500: { description: 'Error del servidor' }
     }
   }
     },
 
-    "/api/usuarios": {
+    '/api/usuarios': {
       get: {
-        summary: "Obtener todos los usuarios",
-        tags: ["Usuarios"],
+        summary: 'Obtener todos los usuarios',
+        tags: ['Usuarios'],
         security: [{ bearerAuth: [] }],
         responses: {
           200: {
-            description: "Lista de usuarios",
+            description: 'Lista de usuarios',
             content: {
-              "application/json": {
+              'application/json': {
                 schema: {
-                  type: "array",
+                  type: 'array',
                   items: {
-                    type: "object",
+                    type: 'object',
                     properties: {
-                      UsuarioID: { type: "integer" },
-                      NombreUsuario: { type: "string" },
-                      CorreoElectronico: { type: "string" },
-                      FechaRegistro: { type: "string", format: "date-time" },
-                      EsActivo: { type: "boolean" }
+                      UsuarioID: { type: 'integer' },
+                      NombreUsuario: { type: 'string' },
+                      CorreoElectronico: { type: 'string' },
+                      FechaRegistro: { type: 'string', format: 'date-time' },
+                      EsActivo: { type: 'boolean' }
                     }
                   }
                 }
@@ -81,94 +81,94 @@ module.exports = {
         }
       },
       post: {
-        summary: "Crear nuevo usuario",
-        tags: ["Usuarios"],
+        summary: 'Crear nuevo usuario',
+        tags: ['Usuarios'],
         requestBody: {
           required: true,
           content: {
-            "application/json": {
+            'application/json': {
               schema: {
-                type: "object",
+                type: 'object',
                 properties: {
-                  NombreUsuario: { type: "string" },
-                  CorreoElectronico: { type: "string" },
-                  password: { type: "string" }
+                  NombreUsuario: { type: 'string' },
+                  CorreoElectronico: { type: 'string' },
+                  password: { type: 'string' }
                 },
-                required: ["NombreUsuario", "CorreoElectronico", "password"]
+                required: ['NombreUsuario', 'CorreoElectronico', 'password']
               }
             }
           }
         },
         responses: {
-          201: { description: "Usuario creado exitosamente" },
-          400: { description: "Faltan campos obligatorios" }
+          201: { description: 'Usuario creado exitosamente' },
+          400: { description: 'Faltan campos obligatorios' }
         }
       }
     },
-    "/api/usuarios/{id}": {
+    '/api/usuarios/{id}': {
       get: {
-        summary: "Obtener un usuario por ID",
-        tags: ["Usuarios"],
+        summary: 'Obtener un usuario por ID',
+        tags: ['Usuarios'],
         security: [{ bearerAuth: [] }],
         parameters: [
           {
-            name: "id",
-            in: "path",
+            name: 'id',
+            in: 'path',
             required: true,
-            schema: { type: "integer" }
+            schema: { type: 'integer' }
           }
         ],
         responses: {
-          200: { description: "Usuario encontrado" },
-          404: { description: "Usuario no encontrado" }
+          200: { description: 'Usuario encontrado' },
+          404: { description: 'Usuario no encontrado' }
         }
       },
       put: {
-        summary: "Actualizar un usuario",
-        tags: ["Usuarios"],
+        summary: 'Actualizar un usuario',
+        tags: ['Usuarios'],
         security: [{ bearerAuth: [] }],
         parameters: [
           {
-            name: "id",
-            in: "path",
+            name: 'id',
+            in: 'path',
             required: true,
-            schema: { type: "integer" }
+            schema: { type: 'integer' }
           }
         ],
         requestBody: {
           content: {
-            "application/json": {
+            'application/json': {
               schema: {
-                type: "object",
+                type: 'object',
                 properties: {
-                  NombreUsuario: { type: "string" },
-                  CorreoElectronico: { type: "string" },
-                  password: { type: "string" },
-                  EsActivo: { type: "boolean" }
+                  NombreUsuario: { type: 'string' },
+                  CorreoElectronico: { type: 'string' },
+                  password: { type: 'string' },
+                  EsActivo: { type: 'boolean' }
                 }
               }
             }
           }
         },
         responses: {
-          200: { description: "Usuario actualizado" },
-          400: { description: "Nada que actualizar" }
+          200: { description: 'Usuario actualizado' },
+          400: { description: 'Nada que actualizar' }
         }
       },
       delete: {
-        summary: "Eliminar usuario por ID",
-        tags: ["Usuarios"],
+        summary: 'Eliminar usuario por ID',
+        tags: ['Usuarios'],
         security: [{ bearerAuth: [] }],
         parameters: [
           {
-            name: "id",
-            in: "path",
+            name: 'id',
+            in: 'path',
             required: true,
-            schema: { type: "integer" }
+            schema: { type: 'integer' }
           }
         ],
         responses: {
-          200: { description: "Usuario eliminado" }
+          200: { description: 'Usuario eliminado' }
         }
       }
     }
@@ -176,9 +176,9 @@ module.exports = {
   components: {
     securitySchemes: {
       bearerAuth: {
-        type: "http",
-        scheme: "bearer",
-        bearerFormat: "JWT"
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT'
       }
     }
   }

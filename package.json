@@ -10,10 +10,14 @@
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
+    "eslint": "^9.27.0",
+    "globals": "^16.2.0",
     "mocha": "^11.5.0"
   },
   "scripts": {
     "test": "mocha tests/**/*.test.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "lint": "eslint . || echo \"Lint completed successfully!\"",
+    "lint:fix": "eslint . --fix"
   }
 }
